@@ -14,11 +14,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False	#flask was tracking the our
 app.secret_key = 'shubham'
 api = Api(app)
 
-#To create the tables using sqlalchemy, and not use the script create_tables.py. Use the following.
-@app.before_first_request
-def create_tables():
-	db.create_all()
-
 
 jwt = JWT(app, authenticate, identity) # /auth
 
