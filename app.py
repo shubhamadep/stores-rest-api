@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -9,7 +10,7 @@ from resources.store import Store, StoreList
 #JWT - json web talk
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') 	#either use Heroku postgres, if not available then the default is the second parameter.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False	#flask was tracking the our data objects, but now sqlalchemy has its own tracker which it can use, so we turn off this one.
 app.secret_key = 'shubham'
 api = Api(app)
